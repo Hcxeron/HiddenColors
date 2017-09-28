@@ -4,15 +4,388 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.newbapps.bullsandcows.MainActivity">
+    android:background="@drawable/background3"
+    tools:context="com.newbapps.bullsandcows.MainActivity"
+    tools:layout_editor_absoluteY="25dp"
+    tools:layout_editor_absoluteX="0dp">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/LayoutGuess6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toBottomOf="@+id/LayoutGuess5"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/LayoutGuess5">
+
+        <ImageView
+            android:id="@+id/imageViewGuess61"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="127dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess62"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="313dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess63"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess64"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutGuess5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/LayoutGuess4"
+        app:layout_constraintTop_toBottomOf="@+id/LayoutGuess4"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/LayoutGuess4">
+
+        <ImageView
+            android:id="@+id/imageViewGuess51"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="127dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess52"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="313dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess53"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess54"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutGuess4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/LayoutGuess3"
+        app:layout_constraintTop_toBottomOf="@+id/LayoutGuess3"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/LayoutGuess3">
+
+        <ImageView
+            android:id="@+id/imageViewGuess41"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="127dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess42"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="313dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess43"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess44"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutGuess3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/LayoutGuess2"
+        app:layout_constraintTop_toBottomOf="@+id/LayoutGuess2"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/LayoutGuess2">
+
+        <ImageView
+            android:id="@+id/imageViewGuess31"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="127dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess32"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="313dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess33"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess34"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutGuess2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/LayoutGuess1"
+        app:layout_constraintTop_toBottomOf="@+id/LayoutGuess1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/LayoutGuess1">
+
+        <ImageView
+            android:id="@+id/imageViewGuess21"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="127dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess22"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="313dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess23"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess24"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutGuess1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/Layouthidden"
+        android:layout_marginTop="19dp"
+        app:layout_constraintTop_toBottomOf="@+id/Layouthidden"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/Layouthidden">
+
+        <ImageView
+            android:id="@+id/imageViewGuess11"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="127dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess12"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="313dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess13"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess14"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="179dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:text="Guess the colors"
+            android:textSize="14sp"
+            tools:layout_editor_absoluteX="141dp"
+            tools:layout_editor_absoluteY="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Layouthidden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewHidden4"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbquestion"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="127dp" />
+
+        <ImageView
+            android:id="@+id/imageViewHidden2"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbquestion"
+            tools:layout_editor_absoluteX="313dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewHidden1"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbquestion"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewHidden3"
+            android:layout_width="82dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbquestion"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
