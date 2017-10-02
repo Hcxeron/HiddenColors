@@ -1,5 +1,6 @@
 package com.newbapps.bullsandcows;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,21 +13,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity implements MainView{
+public class MainActivity extends AppCompatActivity{
     int[][] arrGuesslayout;
     Set<View> setGuessClick = new HashSet<>();
     Set<Integer> setOfColors = new HashSet<>();
+    Object[] setOfColorsArr;
+    Object [] setOfColorsUsedArr;
     Set<Integer> setOfColorsUsed = new HashSet<>();
-    int numberOfGuesses = 7;
+    private Map<String, Integer> mapResults =new HashMap<>();
+    int numberOfGuesses = 8;
     int triesPerGuess = 4;
     int clickCount = 0;
     int guessCount = 0;
     Iterator<Integer> iterSetOfColor;
+    
+    GameLogic gameLogic = new GameLogic();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +46,9 @@ public class MainActivity extends AppCompatActivity implements MainView{
     }
 
     protected void initDataStructs() {
-        arrGuesslayout = new int [ 7 ] [ 6 ];
+
+
+        arrGuesslayout = new int [ numberOfGuesses ] [ triesPerGuess+2 ];
         arrGuesslayout[0][0] = R.id.imageViewGuess11;
         arrGuesslayout[0][1] = R.id.imageViewGuess12;
         arrGuesslayout[0][2] = R.id.imageViewGuess13;
@@ -81,6 +91,13 @@ public class MainActivity extends AppCompatActivity implements MainView{
         arrGuesslayout[6][3] = R.id.imageViewGuess74;
         arrGuesslayout[6][4] = R.id.imageViewFinger7;
         arrGuesslayout[6][5] = R.id.imageViewCheck7;
+        arrGuesslayout[7][0] = R.id.imageViewGuess81;
+        arrGuesslayout[7][1] = R.id.imageViewGuess82;
+        arrGuesslayout[7][2] = R.id.imageViewGuess83;
+        arrGuesslayout[7][3] = R.id.imageViewGuess84;
+        arrGuesslayout[7][4] = R.id.imageViewFinger8;
+        arrGuesslayout[7][5] = R.id.imageViewCheck8;
+
 
         setOfColors.add(R.drawable.orbpurple);
         setOfColors.add(R.drawable.orbgreen);
@@ -90,7 +107,29 @@ public class MainActivity extends AppCompatActivity implements MainView{
         setOfColors.add(R.drawable.orbdarkblue);
         setOfColors.add(R.drawable.orbpink);
         setOfColors.add(R.drawable.orbcyan);
+
+        setOfColorsArr = setOfColors.toArray();
         iterSetOfColor = setOfColors.iterator();
+
+
+        mapResults.put("00", R.drawable.miss0);
+        mapResults.put("10",R.drawable.hit1);
+        mapResults.put("10",R.drawable.miss1);
+        mapResults.put("20",R.drawable.hit2);
+        mapResults.put("02",R.drawable.miss2);
+        mapResults.put("10",R.drawable.hitmiss22);
+        mapResults.put("11",R.drawable.hitmiss11);
+        mapResults.put("30",R.drawable.hit3);
+        mapResults.put("21",R.drawable.hitmiss21);
+        mapResults.put("12",R.drawable.hitmiss12);
+        mapResults.put("03",R.drawable.miss3);
+      //  mapResults.put("13",R.drawable.hitmiss13);
+      //  mapResults.put("31",R.drawable.hitmiss31);
+        mapResults.put("40",R.drawable.hit4);
+        mapResults.put("04",R.drawable.miss4);
+
+
+       gameLogic.RandomizeGuessArray();
     }
 
     protected void initViewMethods(int numberOfGuesses) {
@@ -116,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
         image.setVisibility(View.VISIBLE);
 
 
-        for (int guessTry = 1; guessTry < 7; guessTry++) {
+        for (int guessTry = 1; guessTry < numberOfGuesses; guessTry++) {
             for (int guessTryNumber = 0; guessTryNumber < triesPerGuess; guessTryNumber++) {
                 image = (ImageView) findViewById(arrGuesslayout[guessTry][guessTryNumber]);
                 image.setClickable(false);
@@ -130,29 +169,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
             }
         }
     }
-
-    private ArrayList<View> getAllChildren(View v) {
-
-            if (!(v instanceof ViewGroup)) {
-                ArrayList<View> viewArrayList = new ArrayList<View>();
-                viewArrayList.add(v);
-                return viewArrayList;
-            }
-
-            ArrayList<View> result = new ArrayList<View>();
-            ViewGroup viewGroup = (ViewGroup) v;
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-
-                View child = viewGroup.getChildAt(i);
-
-                ArrayList<View> viewArrayList = new ArrayList<View>();
-                viewArrayList.add(v);
-                viewArrayList.addAll(getAllChildren(child));
-
-                result.addAll(viewArrayList);
-            }
-            return result;
-    }
+    
 
     public void onClickFunction(View view){
 
@@ -233,7 +250,13 @@ public class MainActivity extends AppCompatActivity implements MainView{
                 ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][img]);
                 image.setClickable(false);
                 image.setEnabled(false);
-                image.setVisibility(View.VISIBLE);
+                if(img==4)
+                {
+                    image.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    image.setVisibility(View.VISIBLE);
+                }
         }
         if (guessCount < numberOfGuesses) {
             guessCount++;
@@ -260,35 +283,52 @@ public class MainActivity extends AppCompatActivity implements MainView{
     }
 
     public void checkResults(){
-            ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][4]);
-            image.setImageResource(R.drawable.miss);
-            image = (ImageView) findViewById(arrGuesslayout[guessCount][5]);
-            image.setImageResource(R.drawable.hit);
+        setOfColorsUsedArr = setOfColorsUsed.toArray();
+
+        int[] resultarr = new int[4];
+        int index =0;
+        for (int i = 0; i <setOfColorsArr.length ; i++) {
+            for (int j = 0; j < setOfColorsUsedArr.length; j++) {
+                if(setOfColorsArr[i] == setOfColorsUsedArr[j])
+                {
+                    resultarr[index] = i+1;
+                    index++;
+                }
+            }
+        }
+
+        ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][4]);
+        image.setVisibility(View.INVISIBLE);
+        image = (ImageView) findViewById(arrGuesslayout[guessCount][5]);
+           // image.setImageResource(mapResults.get(Integer.toString(gameLogic.checkHits(resultarr))+ Integer.toString(gameLogic.checkMiss(resultarr))));
+        String check = gameLogic.getRandom();
+
+        String result = (Integer.toString(gameLogic.checkMiss(resultarr)) + Integer.toString(gameLogic.checkHits(resultarr)));
+        showToast(checkressent(resultarr));
+        showToast(check);
+        image.setImageResource(mapResults.get(result));
+
+        if (result.equals("40"))
+        {
 
 
+        }
 
     }
+
+    public String checkressent(int[] resultarr)
+    {
+        String result = new String();
+        for (int i = 0; i <resultarr.length ; i++) {
+
+            result += Integer.toString(resultarr[i]);
+
+        }
+        return result;
+    }
+
+
     public void gameOver(){
-
-    }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
-    public void setItems(List<String> items) {
-
-    }
-
-    @Override
-    public void showMessage(String message) {
 
     }
 

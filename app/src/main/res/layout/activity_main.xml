@@ -4,10 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background3"
+    android:background="@drawable/background2"
     tools:context="com.newbapps.bullsandcows.MainActivity"
     tools:layout_editor_absoluteY="25dp"
     tools:layout_editor_absoluteX="0dp">
+
+    <LinearLayout
+        android:id="@+id/LayoutGuess8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="120dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="@+id/LayoutGuess7"
+        app:layout_constraintTop_toBottomOf="@+id/LayoutGuess5"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+        <ImageView
+            android:id="@+id/imageViewFinger8"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/finger"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="176dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess81"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="127dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess82"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="313dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess83"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewGuess84"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/orbgrey"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="49dp" />
+
+        <ImageView
+            android:id="@+id/imageViewCheck8"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/check" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/LayoutGuess7"
@@ -19,8 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/LayoutGuess5"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="0dp">
+        android:layout_marginTop="60dp">
 
         <ImageView
             android:id="@+id/imageViewFinger7"
@@ -413,15 +479,15 @@
         android:id="@+id/LayoutGuess1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/Layouthidden"
         app:layout_constraintRight_toRightOf="@+id/Layouthidden"
-        android:layout_marginTop="52dp"
         app:layout_constraintTop_toBottomOf="@+id/Layouthidden"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/Layouthidden">
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
 
         <ImageView
             android:id="@+id/imageViewFinger1"
@@ -484,23 +550,18 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="-5dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0">
 
-        <TextView
-            android:id="@+id/textView"
-            style="@style/Widget.AppCompat.TextView.SpinnerItem"
-            android:layout_width="179dp"
-            android:layout_height="31dp"
-            android:text="Guess the colors"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="141dp"
-            tools:layout_editor_absoluteY="5dp" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            app:srcCompat="@drawable/logo" />
     </LinearLayout>
 
     <LinearLayout
@@ -513,13 +574,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="-7dp">
+        app:layout_constraintLeft_toLeftOf="parent">
 
         <ImageView
             android:id="@+id/imageViewHidden4"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/orbquestion"
             tools:layout_editor_absoluteX="185dp"
@@ -527,8 +587,8 @@
 
         <ImageView
             android:id="@+id/imageViewHidden2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/orbquestion"
             tools:layout_editor_absoluteX="313dp"
@@ -536,51 +596,23 @@
 
         <ImageView
             android:id="@+id/imageViewHidden1"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
+            android:adjustViewBounds="false"
             app:srcCompat="@drawable/orbquestion"
             tools:layout_editor_absoluteX="214dp"
             tools:layout_editor_absoluteY="49dp" />
 
         <ImageView
             android:id="@+id/imageViewHidden3"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/orbquestion"
             tools:layout_editor_absoluteX="115dp"
             tools:layout_editor_absoluteY="49dp" />
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/miss"
-        android:layout_marginTop="-7dp"
-        app:layout_constraintTop_toBottomOf="@+id/Layouthidden"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/LayoutGuess1"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/hit"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/Layouthidden"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/LayoutGuess1"
-        app:layout_constraintVertical_bias="0.571"
-        app:layout_constraintLeft_toRightOf="@+id/imageView"
-        android:layout_marginLeft="252dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
