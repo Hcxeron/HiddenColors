@@ -55,6 +55,14 @@ import java.util.Set;
 
         }
 
+        public void RandomizeGuessArray2() {
+            for (int i=0 ; i < guessLength ; i++){
+
+                    arrayCurrentGuess[i] = i+1;
+                }
+
+        }
+
         public String getRandom()
         {
            String result = new String();

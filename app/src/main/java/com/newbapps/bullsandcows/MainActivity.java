@@ -1,14 +1,21 @@
 package com.newbapps.bullsandcows;
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,18 +23,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity{
     int[][] arrGuesslayout;
     Set<View> setGuessClick = new HashSet<>();
-    Set<Integer> setOfColors = new HashSet<>();
-    Object[] setOfColorsArr;
-    Object [] setOfColorsUsedArr;
-    Set<Integer> setOfColorsUsed = new HashSet<>();
+
+    ArrayList<Integer> setOfColors = new ArrayList<>();
+    ArrayList<Integer> setOfColorsUsed = new ArrayList<>();
+
+    Integer[] setOfColorsArr;
+    Integer[] setOfColorsUsedArr = new Integer[4];
+
     private Map<String, Integer> mapResults =new HashMap<>();
+    private Map<Integer, Integer> mapColorsIndex =new HashMap<>();
     int numberOfGuesses = 8;
     int triesPerGuess = 4;
     int clickCount = 0;
@@ -46,8 +56,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     protected void initDataStructs() {
-
-
         arrGuesslayout = new int [ numberOfGuesses ] [ triesPerGuess+2 ];
         arrGuesslayout[0][0] = R.id.imageViewGuess11;
         arrGuesslayout[0][1] = R.id.imageViewGuess12;
@@ -108,23 +116,32 @@ public class MainActivity extends AppCompatActivity{
         setOfColors.add(R.drawable.orbpink);
         setOfColors.add(R.drawable.orbcyan);
 
-        setOfColorsArr = setOfColors.toArray();
-        iterSetOfColor = setOfColors.iterator();
 
+        mapColorsIndex.put(R.drawable.orbpurple,1);
+        mapColorsIndex.put(R.drawable.orbgreen,2);
+        mapColorsIndex.put(R.drawable.orborange,3);
+        mapColorsIndex.put(R.drawable.orbred,4);
+        mapColorsIndex.put(R.drawable.orbyellow,5);
+        mapColorsIndex.put(R.drawable.orbdarkblue,6);
+        mapColorsIndex.put(R.drawable.orbpink,7);
+        mapColorsIndex.put(R.drawable.orbcyan,8);
+
+        setOfColorsArr = setOfColors.toArray(new Integer[8]);
+        iterSetOfColor = setOfColors.iterator();
 
         mapResults.put("00", R.drawable.miss0);
         mapResults.put("10",R.drawable.hit1);
-        mapResults.put("10",R.drawable.miss1);
+        mapResults.put("01",R.drawable.miss1);
         mapResults.put("20",R.drawable.hit2);
         mapResults.put("02",R.drawable.miss2);
-        mapResults.put("10",R.drawable.hitmiss22);
+        mapResults.put("22",R.drawable.hitmiss22);
         mapResults.put("11",R.drawable.hitmiss11);
+        mapResults.put("13",R.drawable.hitmiss13);
+        mapResults.put("31",R.drawable.hitmiss31);
         mapResults.put("30",R.drawable.hit3);
         mapResults.put("21",R.drawable.hitmiss21);
         mapResults.put("12",R.drawable.hitmiss12);
         mapResults.put("03",R.drawable.miss3);
-      //  mapResults.put("13",R.drawable.hitmiss13);
-      //  mapResults.put("31",R.drawable.hitmiss31);
         mapResults.put("40",R.drawable.hit4);
         mapResults.put("04",R.drawable.miss4);
 
@@ -179,10 +196,11 @@ public class MainActivity extends AppCompatActivity{
             clickCount++;
         }else{
             int colorToRemove = (int)view.getTag();
-            setOfColorsUsed.remove(colorToRemove);
+
+            setOfColorsUsed.remove(setOfColorsUsed.indexOf(colorToRemove));
+            //setOfColorsUsed.remove(colorToRemove);
         }
 
-        //showToast("Guess the right color combination");
         if(!(iterSetOfColor.hasNext()))
         {
             iterSetOfColor = setOfColors.iterator();
@@ -199,6 +217,8 @@ public class MainActivity extends AppCompatActivity{
         }
         view.setTag(Integer.valueOf(nextcolor));
         ((ImageView)view).setImageResource(nextcolor);
+        setOfColorsUsedArr[getImageButtonId(view)] = Integer.valueOf(nextcolor);
+
         setOfColorsUsed.add(nextcolor);
 
         if (setGuessClick.size() == 4)
@@ -210,6 +230,11 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    private int getImageButtonId(View view) {
+        String IdAsString = view.getResources().getResourceName(view.getId());
+        Integer index = Integer.valueOf(IdAsString.substring(IdAsString.length() - 1));
+        return index-1;
+    }
     private void showToast(String str){
         Toast toast = Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -238,82 +263,81 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void onClickCheckFunction(View view){
-        checkResults();
-
-        for (int guessTryNumber = 0; guessTryNumber < triesPerGuess; guessTryNumber++) {
+        if (!checkResults()) {
+            for (int guessTryNumber = 0; guessTryNumber < triesPerGuess; guessTryNumber++) {
                 ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][guessTryNumber]);
                 image.setClickable(false);
                 image.setVisibility(View.VISIBLE);
                 image.setOnClickListener(null);
-        }
-        for (int img = 4; img < 6; img++) {
+            }
+            for (int img = 4; img < 6; img++) {
                 ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][img]);
                 image.setClickable(false);
                 image.setEnabled(false);
-                if(img==4)
-                {
+                if (img == 4) {
                     image.setVisibility(View.INVISIBLE);
-                }
-                else {
+                } else {
                     image.setVisibility(View.VISIBLE);
                 }
-        }
-        if (guessCount < numberOfGuesses) {
-            guessCount++;
-            for (int guessTryNumber = 0; guessTryNumber < triesPerGuess; guessTryNumber++) {
-                ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][guessTryNumber]);
-                image.setClickable(true);
-                image.setVisibility(View.VISIBLE);
-                image.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {onClickFunction(v);}});
             }
+            if (guessCount < numberOfGuesses - 1) {
+                guessCount++;
+                for (int guessTryNumber = 0; guessTryNumber < triesPerGuess; guessTryNumber++) {
+                    ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][guessTryNumber]);
+                    image.setClickable(true);
+                    image.setVisibility(View.VISIBLE);
+                    image.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onClickFunction(v);
+                        }
+                    });
+                }
                 ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][4]);
                 image.setEnabled(false);
                 image.setVisibility(View.VISIBLE);
 
-                 setGuessClick.clear();
-                 setOfColorsUsed.clear();
-                 clickCount = 0;
-                 iterSetOfColor = setOfColors.iterator();
+                setGuessClick.clear();
+                setOfColorsUsed.clear();
+                clickCount = 0;
+                iterSetOfColor = setOfColors.iterator();
 
-        }else{
-            gameOver();
+            } else {
+
+                gameOver();
+            }
+
         }
-
-
     }
 
-    public void checkResults(){
-        setOfColorsUsedArr = setOfColorsUsed.toArray();
-
+    public boolean checkResults(){
+        boolean hasWon= false;
         int[] resultarr = new int[4];
-        int index =0;
-        for (int i = 0; i <setOfColorsArr.length ; i++) {
-            for (int j = 0; j < setOfColorsUsedArr.length; j++) {
-                if(setOfColorsArr[i] == setOfColorsUsedArr[j])
-                {
-                    resultarr[index] = i+1;
-                    index++;
-                }
-            }
+        for (int i = 0; i < triesPerGuess ; i++) {
+
+            resultarr[i] = mapColorsIndex.get(setOfColorsUsedArr[i]);
+
         }
+
 
         ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][4]);
         image.setVisibility(View.INVISIBLE);
         image = (ImageView) findViewById(arrGuesslayout[guessCount][5]);
-           // image.setImageResource(mapResults.get(Integer.toString(gameLogic.checkHits(resultarr))+ Integer.toString(gameLogic.checkMiss(resultarr))));
-        String check = gameLogic.getRandom();
+        //String check = gameLogic.getRandom();
 
-        String result = (Integer.toString(gameLogic.checkMiss(resultarr)) + Integer.toString(gameLogic.checkHits(resultarr)));
-        showToast(checkressent(resultarr));
-        showToast(check);
+        String result = (Integer.toString(gameLogic.checkHits(resultarr)) + Integer.toString(gameLogic.checkMiss(resultarr)));
+       // showToast(checkressent(resultarr));
+        //showToast(check);
         image.setImageResource(mapResults.get(result));
 
         if (result.equals("40"))
         {
-
+            hasWon = true;
+            gameWon();
 
         }
 
+        return hasWon;
     }
 
     public String checkressent(int[] resultarr)
@@ -329,6 +353,154 @@ public class MainActivity extends AppCompatActivity{
 
 
     public void gameOver(){
+        for (int guessTryNumber = 0; guessTryNumber < triesPerGuess+2; guessTryNumber++) {
+            ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][guessTryNumber]);
+            image.setClickable(false);
+            image.setVisibility(View.VISIBLE);
+            image.setOnClickListener(null);
+        }
+
+        createGameLostDialog();
+    }
+
+    public void gameWon(){
+
+
+            ImageView image;
+        image = (ImageView) findViewById(R.id.imageViewHidden1);
+        image.setImageResource(setOfColorsUsedArr[0]);
+        image = (ImageView) findViewById(R.id.imageViewHidden2);
+        image.setImageResource(setOfColorsUsedArr[1]);
+        image = (ImageView) findViewById(R.id.imageViewHidden3);
+        image.setImageResource(setOfColorsUsedArr[2]);
+        image = (ImageView) findViewById(R.id.imageViewHidden4);
+        image.setImageResource(setOfColorsUsedArr[3]);
+
+        showToast("Game Won!");
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                createGameWonDialog();
+            }
+        }, 2000);
+
+
+    }
+
+    public void createGameWonDialog(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        final View dialogView = getLayoutInflater().inflate(R.layout.gamewon, null);
+        builder.setView(dialogView);
+
+        TextView title = new TextView(this);
+        // You Can Customise your Title here
+        title.setText("You Win!!!");
+        title.setBackgroundColor(Color.BLACK);
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(20);
+
+        builder.setCustomTitle(title);
+        builder.setPositiveButton("New Game", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Exit Game", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+                MainActivity.this.finish();
+            }
+        });
+        AlertDialog b = builder.create();
+        b.setCancelable(false);
+        b.setCanceledOnTouchOutside(false);
+        b.show();
+    }
+
+    public void createGameLostDialog(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        final View dialogView = getLayoutInflater().inflate(R.layout.gamelost, null);
+        builder.setView(dialogView);
+
+        TextView title = new TextView(this);
+        // You Can Customise your Title here
+        title.setText("Game Lost");
+        title.setBackgroundColor(Color.BLACK);
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(20);
+
+        builder.setCustomTitle(title);
+        builder.setPositiveButton("New Game", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Exit Game", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+                MainActivity.this.finish();
+            }
+        });
+        AlertDialog b = builder.create();
+        b.setCancelable(false);
+        b.setCanceledOnTouchOutside(false);
+        b.show();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Exit Game");
+
+        builder.setMessage("Are you sure you want to exit?");
+
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //if you want to kill app . from other then your main avtivity.(Launcher)
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+
+                //if you want to finish just current activity
+
+                MainActivity.this.finish();
+
+            }
+        });
+        builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        final AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+
+
+        dialog.show(); //show() should be called before dialog.getButton().
+
+
 
     }
 
