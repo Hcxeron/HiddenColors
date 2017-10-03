@@ -24,7 +24,7 @@
 
         <ImageView
             android:id="@+id/imageViewFinger8"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/finger"
@@ -91,7 +91,7 @@
 
         <ImageView
             android:id="@+id/imageViewFinger7"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/finger"
@@ -157,7 +157,7 @@
 
         <ImageView
             android:id="@+id/imageViewFinger6"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/finger"
@@ -225,7 +225,7 @@
 
         <ImageView
             android:id="@+id/imageViewFinger5"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/finger"
@@ -293,7 +293,7 @@
 
         <ImageView
             android:id="@+id/imageViewFinger4"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/finger"
@@ -361,7 +361,7 @@
 
         <ImageView
             android:id="@+id/imageViewFinger3"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/finger"
@@ -429,7 +429,7 @@
 
         <ImageView
             android:id="@+id/imageViewFinger2"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/finger"
@@ -498,7 +498,7 @@
 
         <ImageView
             android:id="@+id/imageViewFinger1"
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/finger"
@@ -566,9 +566,19 @@
         app:layout_constraintHorizontal_bias="0.0">
 
         <ImageView
+            android:id="@+id/imageViewReset"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/reset" />
+
+        <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
+            android:layout_width="304dp"
             android:layout_height="51dp"
+            android:layout_marginLeft="20dp"
             app:srcCompat="@drawable/logo" />
     </LinearLayout>
 

@@ -147,27 +147,38 @@ public class MainActivity extends AppCompatActivity{
 
 
        gameLogic.RandomizeGuessArray();
+
+
+        //////////////////////////////////////////////////////
+        Log.d("Myactivity","Randomized colors: "+gameLogic.getRandom());
+        //////////////////////////////////////////////////////
+
     }
 
     protected void initViewMethods(int numberOfGuesses) {
 
+        ImageView image = (ImageView) findViewById(R.id.imageViewReset);
+        image.setClickable(true);
+        image.setVisibility(View.VISIBLE);
+        image.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {onClickFunctionReset(v);}});
+
         for (int guessTry = 0; guessTry < 1; guessTry++) {
             for (int guessTryNumber = 0; guessTryNumber < triesPerGuess; guessTryNumber++) {
-                ImageView image = (ImageView) findViewById(arrGuesslayout[guessTry][guessTryNumber]);
+                image = (ImageView) findViewById(arrGuesslayout[guessTry][guessTryNumber]);
                 image.setClickable(true);
                 image.setVisibility(View.VISIBLE);
                 image.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {onClickFunction(v);}});
 
             }
             for (int img = 4; img < 6; img++){
-                ImageView image = (ImageView) findViewById(arrGuesslayout[guessTry][img]);
+                image = (ImageView) findViewById(arrGuesslayout[guessTry][img]);
                 image.setClickable(false);
                 image.setEnabled(false);
                 image.setVisibility(View.INVISIBLE);
                 }
 
         }
-        ImageView image =(ImageView) findViewById(arrGuesslayout[0][4]);
+        image =(ImageView) findViewById(arrGuesslayout[0][4]);
         image.setClickable(false);
         image.setVisibility(View.VISIBLE);
 
@@ -310,15 +321,42 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    public void onClickFunctionReset(View view) {
+
+       /* for (int i = 0; i < 50 ; i++) {
+            gameLogic.RandomizeGuessArray();
+
+            //////////////////////////////////////////////////////
+            Log.d("Myactivity","Randomized colors: "+gameLogic.getRandom());
+            //////////////////////////////////////////////////////
+        }*/
+
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+
     public boolean checkResults(){
+
+
+
         boolean hasWon= false;
         int[] resultarr = new int[4];
+
+        String resultstr = new String();
+
         for (int i = 0; i < triesPerGuess ; i++) {
 
             resultarr[i] = mapColorsIndex.get(setOfColorsUsedArr[i]);
 
+            resultstr += Integer.toString(resultarr[i]);
         }
 
+        //////////////////////////////////////////////////////
+        log("array colors try "+guessCount+": "+resultstr);
+        //////////////////////////////////////////////////////
 
         ImageView image = (ImageView) findViewById(arrGuesslayout[guessCount][4]);
         image.setVisibility(View.INVISIBLE);
@@ -326,10 +364,18 @@ public class MainActivity extends AppCompatActivity{
         //String check = gameLogic.getRandom();
 
         String result = (Integer.toString(gameLogic.checkHits(resultarr)) + Integer.toString(gameLogic.checkMiss(resultarr)));
-       // showToast(checkressent(resultarr));
+
+        ///////////////////////////////////////
+        log("result try "+guessCount+" :"+result);
+        //////////////////////////////////////
+
+        // / showToast(checkressent(resultarr));
         //showToast(check);
         image.setImageResource(mapResults.get(result));
-
+        if (result.equals("31"))
+        {
+            showToast("wow");
+        }
         if (result.equals("40"))
         {
             hasWon = true;
@@ -506,6 +552,6 @@ public class MainActivity extends AppCompatActivity{
 
     void log(String str)
     {
-        Log.d("i",str);
+        Log.d("MyActivity",str);
     }
 }
